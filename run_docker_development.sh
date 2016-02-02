@@ -1,6 +1,10 @@
 #!/bin/bash
 CURRENT_DIR=`pwd`
 
+if [ -f .env ]; then
+  export $(cat .env)
+fi
+
 echo 'Starting Kaltura broker in local development mode...'
 echo ''
 if [[ "Z$FBF_TOKEN" == 'Z' ]]; then
@@ -11,6 +15,7 @@ if [[ "Z$FBF_TOKEN" == 'Z' ]]; then
   echo ' - KALTURA_PARTNER_ID - The partner ID that is attached to the Kaltura secret'
   echo ' - FBF_TOKEN - A hidden secret that is only known to FeedbackFruits, in order to lock down this service.'
   echo ''
+  exit 1
 fi
 echo "Mounting current directory: $CURRENT_DIR to /usr/src/app..."
 echo ""
