@@ -1,6 +1,8 @@
 # Kaltura Broker
 A session broker to create and pass on Kaltura Sessions (KSs) in order to avoid exposing the Kaltura secret to third parties. 
 
+Licensed under the MIT License, see License file.
+
 ## Configuration
 The service requires the following parameters to be passed in as environment variables:
 - `KALTURA_SECRET` - The secret used by the university
