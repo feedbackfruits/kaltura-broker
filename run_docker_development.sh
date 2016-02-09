@@ -10,6 +10,7 @@ echo ''
 if [[ "Z$FBF_TOKEN" == 'Z' ]]; then
   echo 'Aborting, make sure you have configured the following environment variables first:'
   echo ''
+  echo ' - KALTURA_SESSION_EXPIRY - The expiration time of the created sessions, in seconds'
   echo ' - KALTURA_SECRET - The secret used by the university'
   echo ' - KALTURA_USER_ID - The user ID that is attached to the Kaltura secret'
   echo ' - KALTURA_PARTNER_ID - The partner ID that is attached to the Kaltura secret'
@@ -20,6 +21,7 @@ fi
 echo "Mounting current directory: $CURRENT_DIR to /usr/src/app..."
 echo ""
 echo 'Environment configured to:'
+echo "KALTURA_SESSION_EXPIRY: $KALTURA_SESSION_EXPIRY"
 echo "KALTURA_SECRET: $KALTURA_SECRET"
 echo "KALTURA_USER_ID: $KALTURA_USER_ID"
 echo "KALTURA_PARTNER_ID: $KALTURA_PARTNER_ID"
@@ -31,6 +33,7 @@ docker run \
   --rm -it \
   --name kaltura-broker-local \
   -v "$CURRENT_DIR":/usr/src/app \
+  -e "KALTURA_SESSION_EXPIRY=$KALTURA_SESSION_EXPIRY" \
   -e "KALTURA_SECRET=$KALTURA_SECRET" \
   -e "KALTURA_USER_ID=$KALTURA_USER_ID" \
   -e "KALTURA_PARTNER_ID=$KALTURA_PARTNER_ID" \

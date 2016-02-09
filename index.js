@@ -12,6 +12,10 @@ if (typeof process.env.FBF_TOKEN === 'undefined' || process.env.FBF_TOKEN.length
   process.exit(1);
 }
 
+if (typeof process.env.KALTURA_SESSION_EXPIRY === 'undefined') {
+  console.warn("No KALTURA_SESSION_EXPIRY set, sessions will not expire!")
+}
+
 server.get('/session', (req, res) => {
   if (req.headers['x-fbf-token'] !== process.env.FBF_TOKEN) return res.status(403).end();
 
@@ -21,6 +25,7 @@ server.get('/session', (req, res) => {
       service: 'session',
       action: 'start',
       format: JSON_FORMAT,
+      expiry: process.env.KALTURA_SESSION_EXPIRY,
       secret: process.env.KALTURA_SECRET,
       userId: process.env.KALTURA_USER_ID,
       partnerId: process.env.KALTURA_PARTNER_ID
