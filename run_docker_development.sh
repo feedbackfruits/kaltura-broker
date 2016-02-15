@@ -22,10 +22,13 @@ echo "Mounting current directory: $CURRENT_DIR to /usr/src/app..."
 echo ""
 echo 'Environment configured to:'
 echo "KALTURA_SESSION_EXPIRY: $KALTURA_SESSION_EXPIRY"
+echo "KALTURA_SESSION_PRIVILEGES: $KALTURA_SESSION_PRIVILEGES"
 echo "KALTURA_SECRET: $KALTURA_SECRET"
 echo "KALTURA_USER_ID: $KALTURA_USER_ID"
 echo "KALTURA_PARTNER_ID: $KALTURA_PARTNER_ID"
 echo "FBF_TOKEN: $FBF_TOKEN"
+echo "SSL_KEY=$SSL_KEY"
+echo "SSL_CERT=$SSL_CERT"
 echo ''
 echo 'Connect to: http://localhost:3000'
 
@@ -34,9 +37,13 @@ docker run \
   --name kaltura-broker-local \
   -v "$CURRENT_DIR":/usr/src/app \
   -e "KALTURA_SESSION_EXPIRY=$KALTURA_SESSION_EXPIRY" \
+  -e "KALTURA_SESSION_PRIVILEGES=$KALTURA_SESSION_PRIVILEGES" \
   -e "KALTURA_SECRET=$KALTURA_SECRET" \
   -e "KALTURA_USER_ID=$KALTURA_USER_ID" \
   -e "KALTURA_PARTNER_ID=$KALTURA_PARTNER_ID" \
   -e "FBF_TOKEN=$FBF_TOKEN" \
-  --publish=3000:3000 \
+  -e "SSL_KEY=$SSL_KEY" \
+  -e "SSL_CERT=$SSL_CERT" \
+  -p $HTTP_PORT:3000 \
+  -p $HTTPS_PORT:3001 \
   kaltura-broker $@

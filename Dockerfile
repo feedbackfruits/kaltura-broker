@@ -15,7 +15,7 @@ COPY ./package.json /usr/src/app/
 
 RUN npm install
 
-COPY ./*.js /usr/src/app/
+COPY ./*.js* /usr/src/app/
 
 # Please set the following environment variables in
 # order to run the Kaltura Broker server:
@@ -24,8 +24,10 @@ COPY ./*.js /usr/src/app/
 # - KALTURA_PARTNER_ID - The partner ID that is attached to the Kaltura secret
 # - FBF_TOKEN - A hidden secret that is only known to FeedbackFruits, in order to lock down this service.
 
-ENV PORT=3000
+ENV HTTP_PORT=3000
+ENV HTTPS_PORT=3001
 
 CMD ["node", "index.js"]
 
 EXPOSE 3000
+EXPOSE 3001
