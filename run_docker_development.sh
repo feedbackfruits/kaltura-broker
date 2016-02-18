@@ -5,6 +5,8 @@ if [ -f .env ]; then
   export $(cat .env)
 fi
 
+npm install
+
 echo 'Starting Kaltura broker in local development mode...'
 echo ''
 if [[ "Z$FBF_TOKEN" == 'Z' ]]; then

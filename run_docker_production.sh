@@ -1,6 +1,8 @@
 #!/bin/bash
 CURRENT_DIR=`pwd`
 
+npm install
+
 echo 'Starting Kaltura broker in production...'
 echo ''
 if [[ "Z$FBF_TOKEN" == 'Z' ]]; then
