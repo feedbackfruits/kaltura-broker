@@ -1,8 +1,6 @@
 #!/bin/bash
 CURRENT_DIR=`pwd`
 
-npm install
-
 echo 'Starting Kaltura broker in production...'
 echo ''
 if [[ "Z$FBF_TOKEN" == 'Z' ]]; then
@@ -20,10 +18,8 @@ echo 'Environment configured.'
 echo ''
 echo 'Connect to: http://localhost:3000'
 
-docker run \
-  --rm \
+docker run -d \
   --name kaltura-broker \
-  -v "$CURRENT_DIR":/usr/src/app \
   -e "KALTURA_SESSION_EXPIRY=$KALTURA_SESSION_EXPIRY" \
   -e "KALTURA_SESSION_PRIVILEGES=$KALTURA_SESSION_PRIVILEGES" \
   -e "KALTURA_SECRET=$KALTURA_SECRET" \
